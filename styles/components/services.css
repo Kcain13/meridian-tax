@@ -1,0 +1,293 @@
+/* ============================================================
+   COMPONENT STYLES: Services
+   ============================================================ */
+
+   .services {
+    background: var(--color-gray-100);
+  }
+  
+  .services-header {
+    max-width: 560px;
+  }
+  
+  .services-header.text-center {
+    max-width: 100%;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  
+  /* ---- Card ---- */
+  .service-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    border: 1px solid var(--color-gray-200);
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-navy), var(--color-sky));
+    transform: scaleX(0);
+    transition: transform var(--transition);
+    transform-origin: left;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-sky);
+  }
+  
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+  
+  /* ---- Icon ---- */
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, rgba(11, 45, 114, 0.08), rgba(0, 174, 239, 0.12));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-navy);
+    margin-bottom: 20px;
+    transition: all var(--transition);
+  }
+  
+  .service-card:hover .service-icon {
+    background: var(--color-sky);
+    color: var(--color-white);
+  }
+  
+  /* ---- Text ---- */
+  .service-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  
+  .service-desc {
+    font-size: 0.88rem;
+    color: var(--color-gray-600);
+    line-height: 1.7;
+  }
+  
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-sky);
+    transition: gap var(--transition);
+  }
+  
+  .service-card:hover .service-link {
+    gap: 10px;
+  }
+  
+  /* ---- Responsive ---- */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card  { padding: 28px 24px; }
+  }
+  
+  /* ============================================================
+     Expand / Collapse behavior for service cards
+     ============================================================ */
+  
+  /* ---- Collapsed vs Expanded toggle ---- */
+  .service-card-expanded {
+    display: none;
+  }
+  
+  .service-card.expanded .service-card-collapsed {
+    display: none;
+  }
+  
+  .service-card.expanded .service-card-expanded {
+    display: block;
+    animation: serviceExpandIn 0.35s ease;
+  }
+  
+  @keyframes serviceExpandIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* ---- When a card is expanded, hide all sibling cards and let the
+          expanded one take the full grid width ---- */
+  .services-grid.grid-has-expanded {
+    display: block;
+  }
+  
+  .services-grid.grid-has-expanded .service-card {
+    display: none;
+  }
+  
+  .services-grid.grid-has-expanded .service-card.expanded {
+    display: block;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  
+  /* Make the collapsed card itself clickable */
+  .service-card-collapsed {
+    cursor: pointer;
+  }
+  
+  /* ---- Expanded card styling ---- */
+  .service-card.expanded {
+    cursor: default;
+    padding: 40px 44px;
+  }
+  
+  .service-card.expanded:hover {
+    transform: none;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .service-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-sky);
+    margin-bottom: 28px;
+    transition: gap var(--transition);
+  }
+  
+  .service-back-btn:hover {
+    gap: 12px;
+  }
+  
+  .service-expanded-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-navy), var(--color-sky));
+    color: var(--color-white);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  
+  .service-expanded-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  
+  .service-expanded-body {
+    font-size: 0.95rem;
+    color: var(--color-gray-600);
+    line-height: 1.8;
+  }
+  
+  .service-expanded-body p {
+    margin-bottom: 16px;
+  }
+  
+  /* ---- Bulleted list within expanded view ---- */
+  .service-list-label {
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+  }
+  
+  .service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .service-list li {
+    position: relative;
+    padding-left: 26px;
+    font-size: 0.9rem;
+    color: var(--color-gray-600);
+    line-height: 1.5;
+  }
+  
+  .service-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-sky);
+  }
+  
+  /* ---- Subsections (e.g. Audits / Reviews / Compilations) ---- */
+  .service-subsection {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-gray-200);
+  }
+  
+  .service-subsection:first-of-type {
+    margin-top: 28px;
+  }
+  
+  .service-subsection h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 8px;
+  }
+  
+  .service-subsection p {
+    font-size: 0.9rem;
+    color: var(--color-gray-600);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+  
+  /* ---- CTA at bottom of expanded card ---- */
+  .service-cta {
+    margin-top: 28px;
+  }
+  
+  /* ---- Responsive ---- */
+  @media (max-width: 600px) {
+    .service-card.expanded {
+      padding: 28px 24px;
+    }
+    .service-expanded-title {
+      font-size: 1.3rem;
+    }
+  }
