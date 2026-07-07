@@ -53,7 +53,7 @@
       </div>
   
       <div class="hero-scroll-hint">
-        <span>Scroll</span>
+        
         <div class="hero-scroll-line"></div>
       </div>
     `;
