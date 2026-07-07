@@ -173,7 +173,7 @@
     }
   ];
   
-  function createServices(compact = false) {
+  function createServices(compact = false, expandIndex = null) {
     const el = document.createElement('section');
     el.className = 'services section';
     el.id = 'services';
@@ -212,6 +212,21 @@
   
     initServiceCardExpansion(el);
   
+    // Coming from the navbar's services dropdown — jump straight to the
+    // expanded view for the selected service.
+    if (expandIndex !== null && expandIndex !== undefined) {
+      const targetCard = el.querySelector(`.service-card[data-index="${expandIndex}"]`);
+      if (targetCard) {
+        const grid = el.querySelector('#services-grid');
+        grid.classList.add('grid-has-expanded');
+        targetCard.classList.add('expanded');
+        // Defer scroll until the element is actually in the DOM/layout.
+        requestAnimationFrame(() => {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+    }
+  
     return el;
   }
   
@@ -242,29 +257,31 @@
             Back to Services
           </button>
   
-          <div class="service-expanded-icon">${service.icon}</div>
-          <h3 class="service-expanded-title">${service.title}</h3>
-          <div class="service-expanded-body">
-            <p>${service.description}</p>
+          <div class="service-expanded-content">
+            <div class="service-expanded-icon">${service.icon}</div>
+            <h3 class="service-expanded-title">${service.title}</h3>
+            <div class="service-expanded-body">
+              <p>${service.description}</p>
   
-            ${service.list ? `
-              <p class="service-list-label">${service.list.label}</p>
-              <ul class="service-list">
-                ${service.list.items.map(item => `<li>${item}</li>`).join('')}
-              </ul>
-            ` : ''}
+              ${service.list ? `
+                <p class="service-list-label">${service.list.label}</p>
+                <ul class="service-list">
+                  ${service.list.items.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+              ` : ''}
   
-            ${service.subsections ? service.subsections.map(sub => `
-              <div class="service-subsection">
-                <h4>${sub.heading}</h4>
-                <p>${sub.text}</p>
-              </div>
-            `).join('') : ''}
+              ${service.subsections ? service.subsections.map(sub => `
+                <div class="service-subsection">
+                  <h4>${sub.heading}</h4>
+                  <p>${sub.text}</p>
+                </div>
+              `).join('') : ''}
+            </div>
+  
+            <button class="btn btn-outline service-cta" data-page="contact" data-service="${service.title}">
+              Discuss This Service
+            </button>
           </div>
-  
-          <button class="btn btn-outline service-cta" data-page="contact" data-service="${service.title}">
-            Discuss This Service
-          </button>
         </div>
   
       </div>

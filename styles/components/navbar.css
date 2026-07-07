@@ -2,203 +2,402 @@
    COMPONENT STYLES: Navbar
    ============================================================ */
 
-.navbar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.navbar.scrolled {
-  border-color: var(--color-gray-200);
-  box-shadow: 0 4px 24px rgba(11, 45, 114, 0.10);
-}
-
-.navbar-inner {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  height: 76px;
-}
-
-/* ---- Logo ---- */
-.navbar-logo {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.navbar-logo-img {
-  height: 44px;
-  width: auto;
-  object-fit: contain;
-}
-
-.navbar-logo-fallback {
-  display: none;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, var(--color-navy), var(--color-sky));
-  color: white;
-  font-family: var(--font-primary);
-  font-weight: 800;
-  font-size: 1.4rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-text {
-  font-family: var(--font-primary);
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--color-navy);
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-  display: flex;
-  flex-direction: column;
-}
-
-.logo-text span {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-sky);
-}
-
-/* ---- Nav Links ---- */
-.navbar-nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: auto;
-}
-
-.nav-link {
-  padding: 8px 16px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-navy);
-  border-radius: var(--radius-sm);
-  transition: color var(--transition), background var(--transition);
-  position: relative;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 16px;
-  right: 16px;
-  height: 2px;
-  background: var(--color-sky);
-  transform: scaleX(0);
-  transition: transform var(--transition);
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  transform: scaleX(1);
-}
-
-.nav-link:hover,
-.nav-link.active {
-  color: var(--color-sky);
-}
-
-/* ---- Actions ---- */
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-shrink: 0;
-}
-
-.navbar-phone {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--color-gray-600);
-  transition: color var(--transition);
-}
-
-.navbar-phone:hover {
-  color: var(--color-sky);
-}
-
-.navbar-cta {
-  padding: 10px 22px;
-  font-size: 0.78rem;
-}
-
-/* ---- Hamburger ---- */
-.navbar-hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  padding: 6px;
-  margin-left: auto;
-  cursor: pointer;
-}
-
-.navbar-hamburger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--color-navy);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.navbar-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.navbar-hamburger.open span:nth-child(2) { opacity: 0; }
-.navbar-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-/* ---- Mobile ---- */
-@media (max-width: 900px) {
-  .navbar-phone { display: none; }
-
-  .navbar-nav {
+   .navbar {
     position: fixed;
-    top: 76px; left: 0; right: 0; bottom: 0;
-    flex-direction: column;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /*
+    The frosted-glass effect is applied via this pseudo-element instead of
+    directly on `.navbar`. `backdrop-filter` (like `filter`/`transform`)
+    creates a new containing block for any `position: fixed` descendant.
+    `.navbar-nav` relies on `position: fixed` to cover the full viewport on
+    mobile — if `backdrop-filter` lived on `.navbar` itself, that fixed
+    positioning would resolve against the 76px-tall navbar box instead of
+    the viewport, trapping the mobile menu in a short, overlapping panel.
+    A `::before` pseudo-element is not a real DOM ancestor of `.navbar-nav`,
+    so it can carry `backdrop-filter` without creating that trap.
+  */
+  .navbar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .navbar.scrolled {
+    border-color: var(--color-gray-200);
+    box-shadow: 0 4px 24px rgba(11, 45, 114, 0.10);
+  }
+  
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 76px;
+  }
+  
+  /* ---- Logo ---- */
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .navbar-logo-img {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+  }
+  
+  .navbar-logo-fallback {
+    display: none;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--color-navy), var(--color-sky));
+    color: white;
+    font-family: var(--font-primary);
+    font-weight: 800;
+    font-size: 1.4rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
     justify-content: center;
+  }
+  
+  .logo-text {
+    font-family: var(--font-primary);
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .logo-text span {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-sky);
+  }
+  
+  /* ---- Nav Links ---- */
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+  }
+  
+  .nav-link {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    border-radius: var(--radius-sm);
+    transition: color var(--transition), background var(--transition);
+    position: relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: var(--color-sky);
+    transform: scaleX(0);
+    transition: transform var(--transition);
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-sky);
+  }
+  
+  /* ---- Services Dropdown ---- */
+  .nav-item-dropdown {
+    position: relative;
+  }
+  
+  .nav-link-services {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .nav-link-caret {
+    transition: transform var(--transition);
+  }
+  
+  .nav-item-dropdown.open .nav-link-caret {
+    transform: rotate(180deg);
+  }
+  
+  .services-dropdown-panel {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    width: 340px;
+    max-height: 0;
+    overflow: hidden;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray-200);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition), transform var(--transition), max-height var(--transition);
+    z-index: 1100;
+  }
+  
+  .nav-item-dropdown.open .services-dropdown-panel {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    max-height: 420px;
+    pointer-events: auto;
+  }
+  
+  /* Invisible bridge so the pointer can travel from the link down to the
+     panel without the gap registering a mouseleave and closing it early. */
+  .services-dropdown-panel::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 0;
+    right: 0;
+    height: 14px;
+  }
+  
+  .services-dropdown-list {
+    max-height: 420px;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  .services-dropdown-link {
+    display: block;
+    padding: 11px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    color: var(--color-navy);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition), color var(--transition);
+    line-height: 1.4;
+  }
+  
+  .services-dropdown-link:hover {
+    background: var(--color-gray-100);
+    color: var(--color-sky);
+  }
+  
+  /* ---- Pay Invoice (inline nav link) ---- */
+  /* Hidden on desktop — the standalone button in .navbar-actions covers that breakpoint.
+     Shown only in the mobile slide-out menu. */
+  .nav-link-pay {
+    display: none;
+  }
+  
+  /* ---- Actions ---- */
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+  
+  .navbar-phone {
+    display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-gray-600);
+    transition: color var(--transition);
+  }
+  
+  .navbar-phone:hover {
+    color: var(--color-sky);
+  }
+  
+  .navbar-cta {
+    padding: 10px 22px;
+    font-size: 0.78rem;
+  }
+  
+  /* ---- Upload Documents button (desktop) ---- */
+  /* Inverse of Pay Invoice: white background, navy border and text. */
+  .navbar-upload-btn {
     background: var(--color-white);
-    margin-left: 0;
-    transform: translateX(-100%);
-    transition: transform 0.35s ease;
-    padding: 32px;
-    border-top: 1px solid var(--color-gray-200);
+    color: var(--color-navy);
+    border: 2px solid var(--color-navy);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
-
-  .navbar-nav.open {
-    transform: translateX(0);
+  
+  .navbar-upload-btn:hover {
+    background: var(--color-gray-100);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(11, 45, 114, 0.15);
   }
-
-  .nav-link {
-    font-size: 1.1rem;
-    padding: 14px 32px;
-    width: 100%;
-    text-align: center;
+  
+  /* ---- Pay Invoice (standalone button) ---- */
+  /* Uses the navy brand color to visually distinguish "pay" from the sky-blue
+     "Get Started" style CTA, while staying within the approved palette. */
+  .navbar-pay-btn {
+    background: var(--color-navy);
+    border-color: var(--color-navy);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
-
-  .navbar-hamburger { display: flex; }
-  .navbar-actions .navbar-cta { display: none; }
-}
+  
+  .navbar-pay-btn:hover {
+    background: var(--color-navy-light);
+    border-color: var(--color-navy-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(11, 45, 114, 0.35);
+  }
+  
+  /* ---- Hamburger ---- */
+  .navbar-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px;
+    margin-left: auto;
+    cursor: pointer;
+  }
+  
+  .navbar-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-navy);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .navbar-hamburger.open span:nth-child(2) { opacity: 0; }
+  .navbar-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  
+  /* ---- Mobile ---- */
+  @media (max-width: 900px) {
+    .navbar-phone { display: none; }
+  
+    .navbar-nav {
+      position: fixed;
+      top: 76px; left: 0; right: 0; bottom: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-white);
+      margin-left: 0;
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+      padding: 32px;
+      border-top: 1px solid var(--color-gray-200);
+    }
+  
+    .navbar-nav.open {
+      transform: translateX(0);
+    }
+  
+    .nav-link {
+      font-size: 1.1rem;
+      padding: 14px 32px;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .navbar-hamburger { display: flex; }
+    .navbar-actions .navbar-cta { display: none; }
+    .navbar-actions .navbar-pay-btn { display: none; }
+    .navbar-actions .navbar-upload-btn { display: none; }
+  
+    /* On mobile, the dropdown hover panel doesn't apply — the plain
+       "Services" link in the slide-out menu takes the user to the
+       full Services page instead. */
+    .nav-item-dropdown {
+      width: 100%;
+    }
+  
+    .nav-link-services {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .nav-link-caret,
+    .services-dropdown-panel {
+      display: none;
+    }
+  
+    .nav-link-pay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      background: var(--color-navy);
+      color: var(--color-white) !important;
+      border-radius: var(--radius-sm);
+    }
+  
+    .nav-link-pay::after {
+      display: none;
+    }
+  
+    .nav-link-pay:hover {
+      background: var(--color-navy-light);
+      color: var(--color-white) !important;
+    }
+  
+    .nav-link-upload {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+      background: var(--color-white);
+      color: var(--color-navy) !important;
+      border: 2px solid var(--color-navy);
+      border-radius: var(--radius-sm);
+    }
+  
+    .nav-link-upload::after {
+      display: none;
+    }
+  
+    .nav-link-upload:hover {
+      background: var(--color-gray-100);
+      color: var(--color-navy) !important;
+    }
+  }

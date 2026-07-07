@@ -128,7 +128,9 @@
   }
   
   .service-card.expanded .service-card-expanded {
-    display: block;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 32px;
     animation: serviceExpandIn 0.35s ease;
   }
   
@@ -169,21 +171,50 @@
     box-shadow: var(--shadow-md);
   }
   
+  /* ---- Back button — left sidebar column ---- */
   .service-back-btn {
-    display: inline-flex;
+    grid-column: 1;
+    grid-row: 1;
+  
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    justify-content: flex-start;
+  
+    gap: 10px;
+  
+    width: 100%;
+    margin-top: 32px;
+  
+    background: none;
+    border: none;
+    cursor: pointer;
+  
     color: var(--color-sky);
-    margin-bottom: 28px;
-    transition: gap var(--transition);
+  
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-align: center;
+  
+    transition: color .25s ease,
+                transform .25s ease;
   }
   
   .service-back-btn:hover {
-    gap: 12px;
+    color: var(--color-navy);
+  }
+  
+  .service-back-btn:hover svg {
+    transform: translateX(-4px);
+  }
+  
+ 
+  
+  /* ---- Main content — right column ---- */
+  .service-expanded-content {
+    grid-column: 2;
   }
   
   .service-expanded-icon {
@@ -287,6 +318,32 @@
     .service-card.expanded {
       padding: 28px 24px;
     }
+  
+    /* On small screens, switch back to stacked layout — vertical writing-mode
+       is too cramped. Back button returns to a simple top-row inline button. */
+    .service-card.expanded .service-card-expanded {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  
+    .service-back-btn {
+  
+      margin-bottom: 0 auto 24px;
+      width: fit-content;
+    }
+  
+    .service-back-btn svg {
+      transform: none;
+    }
+  
+    .service-back-btn:hover svg {
+      transform: translateX(-3px);
+    }
+  
+    .service-expanded-content {
+      grid-column: 1;
+    }
+  
     .service-expanded-title {
       font-size: 1.3rem;
     }

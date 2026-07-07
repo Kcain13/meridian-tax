@@ -30,7 +30,7 @@
   
       let pageEl;
       switch (this.currentPage) {
-        case 'services': pageEl = renderServicesPage(); break;
+        case 'services': pageEl = renderServicesPage(this.payload); break;
         case 'about':    pageEl = renderAboutPage();    break;
         case 'contact':  pageEl = renderContactPage(this.payload); break;
         case 'payment':  pageEl = renderPaymentPage();  break;
@@ -50,17 +50,16 @@
     page.appendChild(createHero());
     page.appendChild(createServices(true));   // compact = show 3 cards + "View All" btn
     page.appendChild(createAbout());
-    page.appendChild(createWhyChooseUs());
-    page.appendChild(createTestimonials());
     page.appendChild(createContact());
     page.appendChild(createFooter());
     return page;
   }
   
-  function renderServicesPage() {
+  function renderServicesPage(payload = null) {
     const page = document.createElement('div');
     page.className = 'page';
-    page.appendChild(createServices(false));  // full = all 6 cards, no "View All" btn
+    const expandIndex = payload && typeof payload === 'object' ? payload.expandIndex : null;
+    page.appendChild(createServices(false, expandIndex));  // full = all services, no "View All" btn
     page.appendChild(createContact());
     page.appendChild(createFooter());
     return page;
