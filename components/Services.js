@@ -220,9 +220,12 @@
         const grid = el.querySelector('#services-grid');
         grid.classList.add('grid-has-expanded');
         targetCard.classList.add('expanded');
-        // Defer scroll until the element is actually in the DOM/layout.
+        // Scroll to the top of the services section so the heading is visible,
+        // not to the expanded card directly mid-page.
         requestAnimationFrame(() => {
-          targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          requestAnimationFrame(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
         });
       }
     }
@@ -298,7 +301,8 @@
       grid.classList.add('grid-has-expanded');
       grid.querySelectorAll('.service-card').forEach(c => c.classList.remove('expanded'));
       card.classList.add('expanded');
-      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Scroll to the top of the services section so the heading stays visible.
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   
     function collapseAll() {

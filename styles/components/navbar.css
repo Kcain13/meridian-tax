@@ -216,10 +216,11 @@
     color: var(--color-sky);
   }
   
-  /* ---- Pay Invoice (inline nav link) ---- */
-  /* Hidden on desktop — the standalone button in .navbar-actions covers that breakpoint.
+  /* ---- Pay Invoice + Upload Documents (inline nav links) ---- */
+  /* Hidden on desktop — the standalone buttons in .navbar-actions cover that breakpoint.
      Shown only in the mobile slide-out menu. */
-  .nav-link-pay {
+  .nav-link-pay,
+  .nav-link-upload {
     display: none;
   }
   
