@@ -5,6 +5,7 @@
 // CPACharge secure payment portal — opens in a new tab
 const PAYMENT_PORTAL_URL = 'https://secure.cpacharge.com/pages/meridiantaxadvisoryllc/payments';
 
+// Client document upload portal — opens in a new tab
 const CLIENT_PORTAL_URL = 'https://meridiantaxadvisory.clientportal.com/#/login';
 
 function createNavbar() {
@@ -46,23 +47,30 @@ function createNavbar() {
 
         <a href="#" class="nav-link" data-page="about">About</a>
         <a href="#" class="nav-link" data-page="contact">Contact</a>
+
+        <!-- Mobile-only: Pay Invoice and Upload Documents appear in the slide-out menu -->
         <a href="${PAYMENT_PORTAL_URL}" class="nav-link nav-link-pay" target="_blank" rel="noopener noreferrer">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
           </svg>
           Pay Invoice
         </a>
-    
+        <a href="${CLIENT_PORTAL_URL}" class="nav-link nav-link-upload" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Upload Documents
+        </a>
       </nav>
 
       <div class="navbar-actions">
-      
-      <a href="${CLIENT_PORTAL_URL}" class="btn navbar-cta navbar-upload-btn" target="_blank" rel="noopener noreferrer">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
-        </svg>
-        Upload Documents
-      </a>
+        <!-- Fix: navbar-upload-btn needs btn-outline so the border renders correctly -->
+        <a href="${CLIENT_PORTAL_URL}" class="btn btn-outline navbar-cta navbar-upload-btn" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Upload Documents
+        </a>
         <a href="${PAYMENT_PORTAL_URL}" class="btn btn-primary navbar-cta navbar-pay-btn" target="_blank" rel="noopener noreferrer">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
@@ -111,7 +119,7 @@ function initNavbar() {
     });
   });
 
-  // External payment portal links — just close the mobile menu, let the browser handle navigation
+  // External links — close mobile menu and let the browser navigate
   payLinks.forEach(link => {
     link.addEventListener('click', () => {
       document.getElementById('navbar-nav').classList.remove('open');
@@ -122,20 +130,9 @@ function initNavbar() {
   initServicesDropdown(navbar, hamburger);
 }
 
-/* ----------------------------------------------------------------
-   Services dropdown
-   Desktop: opens on hover, closes when the pointer leaves the
-   dropdown area (link + panel together).
-   Clicking the "Services" link itself still navigates to the full
-   Services page as normal. Clicking an individual service in the
-   list navigates to Services and auto-expands that service's
-   `.service-card-expanded` view.
-   Mobile: the dropdown panel is hidden — the hamburger menu's plain
-   "Services" link takes the user to the page instead.
----------------------------------------------------------------- */
 function initServicesDropdown(navbar) {
   const dropdown    = navbar.querySelector('#services-dropdown');
-  const trigger      = dropdown.querySelector('.nav-link-services');
+  const trigger     = dropdown.querySelector('.nav-link-services');
   const serviceLinks = dropdown.querySelectorAll('.services-dropdown-link');
 
   let closeTimer = null;
@@ -151,11 +148,8 @@ function initServicesDropdown(navbar) {
 
   dropdown.addEventListener('mouseenter', openDropdown);
   dropdown.addEventListener('mouseleave', closeDropdown);
-
-  // Keyboard/touch accessibility: toggle on focus-within via click on the trigger's caret area
   trigger.addEventListener('focus', openDropdown);
 
-  // "Services" link itself — normal full-page navigation
   trigger.addEventListener('click', e => {
     e.preventDefault();
     router.navigate('services');
@@ -164,7 +158,6 @@ function initServicesDropdown(navbar) {
     navbar.querySelector('#navbar-hamburger').classList.remove('open');
   });
 
-  // Individual service links — navigate to Services page and auto-expand that card
   serviceLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
