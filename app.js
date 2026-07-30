@@ -33,7 +33,7 @@
         case 'services': pageEl = renderServicesPage(this.payload); break;
         case 'about':    pageEl = renderAboutPage();    break;
         case 'contact':  pageEl = renderContactPage(this.payload); break;
-        case 'payment':  pageEl = renderPaymentPage();  break;
+       
         default:         pageEl = renderHome();         break;
       }
   

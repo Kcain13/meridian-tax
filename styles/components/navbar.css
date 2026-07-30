@@ -156,33 +156,32 @@
     transform: rotate(180deg);
   }
   
+  /* ---- Level-1: category panel (Tax & Accounting / Financial Planning) ---- */
   .services-dropdown-panel {
     position: absolute;
     top: calc(100% + 14px);
     left: 50%;
     transform: translateX(-50%) translateY(-8px);
-    width: 340px;
-    max-height: 0;
-    overflow: hidden;
+    width: 240px;
     background: var(--color-white);
     border-radius: var(--radius-md);
     border: 1px solid var(--color-gray-200);
     box-shadow: var(--shadow-lg);
     opacity: 0;
     pointer-events: none;
-    transition: opacity var(--transition), transform var(--transition), max-height var(--transition);
+    transition: opacity var(--transition), transform var(--transition);
     z-index: 1100;
+    overflow: visible;
+    padding: 8px;
   }
   
   .nav-item-dropdown.open .services-dropdown-panel {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
-    max-height: 420px;
     pointer-events: auto;
   }
   
-  /* Invisible bridge so the pointer can travel from the link down to the
-     panel without the gap registering a mouseleave and closing it early. */
+  /* Invisible bridge — pointer travels from link to panel without triggering mouseleave */
   .services-dropdown-panel::before {
     content: '';
     position: absolute;
@@ -192,15 +191,71 @@
     height: 14px;
   }
   
+  /* ---- Category row buttons ---- */
+  .svc-cat-item {
+    position: relative;
+  }
+  
+  .svc-cat-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 14px;
+    font-family: var(--font-primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--color-navy);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition), color var(--transition);
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .svc-cat-btn:hover {
+    background: var(--color-gray-100);
+    color: var(--color-sky);
+  }
+  
+  .svc-cat-external {
+    margin-top: 2px;
+  }
+  
+  /* ---- Level-2: services flyout (appears to the right of Tax & Accounting) ---- */
+  .svc-flyout {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 8px);
+    width: 300px;
+    max-height: 0;
+    overflow: hidden;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray-200);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition), max-height 0.3s ease;
+    z-index: 1200;
+  }
+  
+  .svc-cat-item.flyout-open .svc-flyout {
+    opacity: 1;
+    max-height: 440px;
+    pointer-events: auto;
+  }
+  
   .services-dropdown-list {
-    max-height: 420px;
+    max-height: 440px;
     overflow-y: auto;
-    padding: 10px;
+    padding: 8px;
   }
   
   .services-dropdown-link {
     display: block;
-    padding: 11px 14px;
+    padding: 10px 14px;
     font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0.01em;
@@ -216,9 +271,13 @@
     color: var(--color-sky);
   }
   
+  /* ---- Mobile accordion (hidden on desktop) ---- */
+  .mobile-services-accordion {
+    display: none;
+  }
+  
   /* ---- Pay Invoice + Upload Documents (inline nav links) ---- */
-  /* Hidden on desktop — the standalone buttons in .navbar-actions cover that breakpoint.
-     Shown only in the mobile slide-out menu. */
+  /* Hidden on desktop — standalone buttons in .navbar-actions handle desktop */
   .nav-link-pay,
   .nav-link-upload {
     display: none;
@@ -317,15 +376,16 @@
       position: fixed;
       top: 76px; left: 0; right: 0; bottom: 0;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      gap: 8px;
+      gap: 0;
       background: var(--color-white);
       margin-left: 0;
       transform: translateX(-100%);
       transition: transform 0.35s ease;
-      padding: 32px;
+      padding: 16px 24px 32px;
       border-top: 1px solid var(--color-gray-200);
+      overflow-y: auto;
     }
   
     .navbar-nav.open {
@@ -333,69 +393,167 @@
     }
   
     .nav-link {
-      font-size: 1.1rem;
-      padding: 14px 32px;
+      font-size: 1rem;
+      padding: 14px 0;
       width: 100%;
+      text-align: center;
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+  
+    .nav-link::after { display: none; }
+  
+    .navbar-hamburger { display: flex; }
+    .navbar-actions .navbar-cta     { display: none; }
+    .navbar-actions .navbar-pay-btn  { display: none; }
+    .navbar-actions .navbar-upload-btn { display: none; }
+  
+    /* Hide the desktop hover dropdown entirely on mobile */
+    .nav-item-dropdown { display: none; }
+  
+    /* ---- Mobile accordion ---- */
+    .mobile-services-accordion {
+      display: block;
+      width: 100%;
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+  
+    .mobile-accordion-trigger,
+    .mobile-sub-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 0;
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-navy);
+      cursor: pointer;
+      background: none;
       text-align: center;
     }
   
-    .navbar-hamburger { display: flex; }
-    .navbar-actions .navbar-cta { display: none; }
-    .navbar-actions .navbar-pay-btn { display: none; }
-    .navbar-actions .navbar-upload-btn { display: none; }
+    .mobile-accordion-trigger:hover,
+    .mobile-sub-trigger:hover { color: var(--color-sky); }
   
-    /* On mobile, the dropdown hover panel doesn't apply — the plain
-       "Services" link in the slide-out menu takes the user to the
-       full Services page instead. */
-    .nav-item-dropdown {
-      width: 100%;
+    .mobile-accordion-caret,
+    .mobile-sub-caret {
+      transition: transform var(--transition);
+      flex-shrink: 0;
     }
   
-    .nav-link-services {
-      width: 100%;
-      justify-content: center;
+    .mobile-services-accordion.open .mobile-accordion-caret {
+      transform: rotate(180deg);
     }
   
-    .nav-link-caret,
-    .services-dropdown-panel {
-      display: none;
+    .mobile-sub-accordion.open .mobile-sub-caret {
+      transform: rotate(180deg);
     }
   
+    /* Animated slide-down panels */
+    .mobile-accordion-panel,
+    .mobile-sub-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+  
+    /* Sub-accordion wrapper */
+    .mobile-sub-accordion {
+      border-top: 1px solid var(--color-gray-200);
+    }
+  
+    .mobile-sub-trigger {
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      padding: 12px 0 12px 16px;
+      justify-content: flex-start;
+      color: var(--color-gray-600);
+    }
+  
+    /* Individual service links inside the Tax & Accounting sub-panel */
+    .mobile-service-link {
+      display: block;
+      padding: 10px 16px 10px 32px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-navy);
+      border-top: 1px solid var(--color-gray-200);
+      transition: color var(--transition), background var(--transition);
+    }
+  
+    .mobile-service-link:hover {
+      color: var(--color-sky);
+      background: var(--color-gray-100);
+    }
+  
+    /* Financial Planning external link in mobile accordion */
+    .mobile-cat-link {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-gray-600);
+      border-top: 1px solid var(--color-gray-200);
+      transition: color var(--transition);
+    }
+  
+    .mobile-cat-link:hover { color: var(--color-sky); }
+  
+    /* ---- Mobile Pay Invoice ---- */
     .nav-link-pay {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 16px;
+      padding: 13px 0;
+      width: 100%;
       background: var(--color-navy);
       color: var(--color-white) !important;
       border-radius: var(--radius-sm);
+      border-bottom: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
   
-    .nav-link-pay::after {
-      display: none;
-    }
+    .nav-link-pay::after { display: none; }
   
     .nav-link-pay:hover {
       background: var(--color-navy-light);
       color: var(--color-white) !important;
     }
   
+    /* ---- Mobile Upload Documents ---- */
     .nav-link-upload {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 4px;
+      margin-top: 8px;
+      padding: 13px 0;
+      width: 100%;
       background: var(--color-white);
       color: var(--color-navy) !important;
       border: 2px solid var(--color-navy);
       border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
   
-    .nav-link-upload::after {
-      display: none;
-    }
+    .nav-link-upload::after { display: none; }
   
     .nav-link-upload:hover {
       background: var(--color-gray-100);

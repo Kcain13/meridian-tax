@@ -129,18 +129,8 @@
       summary: 'Professional representation during an audit, guiding your dealings with federal and state tax agencies.',
       description: `Professional representation can be vital during an audit, and our experience with tax authorities enables us to guide clients in their dealings with federal and state agencies. If you have been chosen for an audit, the professional representation you can find with our firm can put many of your worries at bay. We are ready and willing to answer any and all questions the IRS may be asking of you.`
     },
-    {
-      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h.01M12 8h4M8 12h.01M12 12h4M8 16h.01M12 16h4"/></svg>`,
-      title: 'Computer Consulting',
-      summary: 'Auditing system competencies and supporting the choice and implementation of new hardware or network systems.',
-      description: `As technologies rapidly advance, companies increasingly need to update their computer systems. Meridian Tax Advisory, LLC can audit your system competencies and gauge upgrade needs as well as provide support in choosing and implementing new hardware or network systems. As experts in this field, we can put your computer problems at bay as well as improve your computer system's performance taking into consideration any budget you may have.`
-    },
-    {
-      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12h4l3 8 4-16 3 8h4"/></svg>`,
-      title: 'Payroll Services',
-      summary: 'Reduce the time spent on administration with a computerized payroll system for processing, payment, and tax returns.',
-      description: `Meridian Tax Advisory, LLC's payroll services can help you reduce the time spent on administration through developing and implementing a computerized payroll system that will facilitate processing, timely payment and preparation of tax returns.`
-    },
+    
+
     {
       icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>`,
       title: 'Cash Flow and Budgeting Analysis',
@@ -159,18 +149,8 @@
       summary: 'Careful analysis and due diligence to help structure and negotiate business transactions and transitions.',
       description: `Business transactions and transitions are complicated affairs, and whether you're buying, selling, or considering a potential merger, Meridian Tax Advisory, LLC can provide professional know-how to help you successfully structure and negotiate the deal. Meridian Tax Advisory, LLC employs careful analysis and due diligence to determine a fair asking price, pinpoint the most favorable tax structures, evaluate financial and cash flow impact, and assess compatible business functions and tactics. Expanding or contracting your business is a huge undertaking. With our expert advice, you can make the right business decisions for your business for optimum success.`
     },
-    {
-      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>`,
-      title: 'Debt and Finance Advising',
-      summary: 'Sorting out debt management and financing options to lower payments and reduce the total amount of interest paid.',
-      description: `Whether your needs are corporate or personal, Meridian Tax Advisory, LLC's professionals can assist you in sorting out the different options available for debt management and financing that will lower your payments and/or reduce the total amount of interest paid. Re-balancing your debts can also result in tax deduction savings. Even if you are able to handle the payments and the amounts of your current debts, our expertise may be able to save you money and/or lower your payments.`
-    },
-    {
-      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`,
-      title: 'International Taxation',
-      summary: 'Extensive knowledge of cross-border taxation for U.S. companies abroad, foreign corporations, and foreign citizens working domestically.',
-      description: `Our experience with the taxation of United States companies doing business abroad and residents working abroad as well as foreign corporations doing business in the United States or foreign citizens working in the United States has provided us with an extensive base of knowledge in the area of international taxation.`
-    }
+   
+  
   ];
   
   function createServices(compact = false, expandIndex = null) {
