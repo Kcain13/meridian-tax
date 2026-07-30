@@ -79,7 +79,7 @@
     },
     {
       icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>`,
-      title: 'Litigation Support and Forensic Accounting',
+      title: 'Litigation Support, Forensic Accounting and Expert Witness Testimony',
       summary: 'Quantification of economic loss, financial record analysis, and fraud investigation across commercial litigation and disputes.',
       description: `Meridian Tax Advisory, LLC litigation support and forensic accounting services can be employed in a wide range of situations, including commercial litigation, financial investigations, business valuations, business and marital dissolutions, and bankruptcies. These services can involve quantification of economic loss or damages, analysis of financial records, and fraud and theft investigation. Financial and personal records are often vast and confusing to sort through. With our professional training in this matter, we can make sense of these records and transactions and get to your bottom line.`
     },
