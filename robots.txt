@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://meridiantaxadvisory.com/sitemap.xml
