@@ -31,36 +31,14 @@
         ]
       }
     },
-    {
-      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
-      title: 'Assurance and Advisory Services',
-      summary: 'Objective analysis to help control costs, increase efficiency, and adapt to changes in the marketplace, standards, and tax law.',
-      description: `At Meridian Tax Advisory, LLC, we focus on building close client relationships that add long-term value. This includes assuring the solidity of financial records, evaluating financial procedures and working to produce strategies that help our clients face the myriad challenges of business planning and execution. Our clients benefit from objective analysis to assist in controlling costs, increasing efficiency, and implementing new technologies and procedures that take advantage of changes in the marketplace, accounting standards, and tax law. Our assurance services will improve information quality or its context, meaning more success for your business.`,
-      list: {
-        label: 'These services include but are not limited to:',
-        items: [
-          'Audits, reviews, and compilations',
-          'Entity selection and restructuring',
-          'Accounting software selection, implementation, and support',
-          'Business valuations',
-          'Financial projections and forecasts',
-          'Debt and finances advising',
-          'Mergers and acquisitions',
-          'Transaction structuring and negotiations',
-          'Business succession'
-        ]
-      }
-    },
+    
     {
       icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>`,
-      title: 'Audits, Reviews, and Compilation',
-      summary: 'Three levels of financial statement assurance — audits, reviews, and compilations — tailored to your company\u2019s needs.',
+      title: 'Reviews, and Compilation',
+      summary: 'Financial statement assurance — reviews, and compilations — tailored to your company\u2019s needs.',
       description: `Meridian Tax Advisory, LLC's financial statement services comprise all three levels of assurance depending on your company's needs.`,
       subsections: [
-        {
-          heading: 'Audits',
-          text: 'Audits offer the highest level of assurance to third parties, and include in-depth examination and confirmation of account balances, inventories, and selected transactions. We perform audits for you to remove errors, ascertaining the validity and reliability of your information.'
-        },
+       
         {
           heading: 'Reviews',
           text: 'Reviews provide limited assurance to outside interests and involve inquiries and analytical procedures that confirm financial statement matters and identify any items requiring further analysis. We perform reviews to ensure the integrity of your data.'
