@@ -36,7 +36,7 @@
       icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>`,
       title: 'Reviews, and Compilation',
       summary: 'Financial statement assurance — reviews, and compilations — tailored to your company\u2019s needs.',
-      description: `Meridian Tax Advisory, LLC's financial statement services comprise all three levels of assurance depending on your company's needs.`,
+      description: `Meridian Tax Advisory, LLC provides two levels of financial statement services, offering the appropriate level of assurance based on your company's needs.`,
       subsections: [
        
         {
