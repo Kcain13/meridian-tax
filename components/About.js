@@ -65,7 +65,7 @@
             </div>
   
             <div class="about-actions">
-              <button class="btn btn-primary" data-page="about">Meet Our Team</button>
+              <button class="btn btn-primary" id="meet-team-btn">Meet Our Team</button>
               <button class="btn btn-outline" data-page="contact">Get In Touch</button>
             </div>
           </div>
@@ -74,8 +74,15 @@
       </div>
     `;
   
+    // "Get In Touch" — standard SPA navigation
     el.querySelectorAll('[data-page]').forEach(btn => {
       btn.addEventListener('click', () => router.navigate(btn.dataset.page));
+    });
+  
+    // "Meet Our Team" — scroll directly to the team list on the same page
+    el.querySelector('#meet-team-btn').addEventListener('click', () => {
+      const teamList = document.querySelector('.team-header');
+      if (teamList) teamList.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   
     return el;
